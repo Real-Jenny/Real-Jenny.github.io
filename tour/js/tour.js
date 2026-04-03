@@ -61,7 +61,7 @@ var myChart = echarts.init(document.getElementById('chinaMap'));
     value: 0
    }, {
     name: '湖北',
-    value: 0
+    value: 1
    }, {
     name: '广西',
     value: 0
@@ -120,7 +120,90 @@ var myChart = echarts.init(document.getElementById('chinaMap'));
    var cityDataByProvince = {
      '黑龙江': {
       '哈尔滨市': { value: 1, link: './cities/guangzhou.html' },
-     }
+     },
+     '吉林':{
+     '长春市': {value:1,link: './cities/guangzhou.html' },
+     '吉林市':{value:1,link: './cities/guangzhou.html' },
+     '通化市':{value:1,link: './cities/guangzhou.html' },
+    },
+     '辽宁':{
+     '沈阳市': {value:1,link: './cities/guangzhou.html' },
+     '大连市':{value:1,link: './cities/guangzhou.html' },
+     '丹东市':{value:1,link: './cities/guangzhou.html' },
+    },
+     '北京':{
+     '海淀区': {value:1,link: './cities/guangzhou.html' },
+     '石景山区':{value:1,link: './cities/guangzhou.html' },
+     '丰台区':{value:1,link: './cities/guangzhou.html' },
+     '东城区':{value:1,link: './cities/guangzhou.html' },
+     '西城区':{value:1,link: './cities/guangzhou.html' },
+     '朝阳区':{value:1,link: './cities/guangzhou.html' },
+    },
+   '天津':{
+     '河西区': {value:1,link: './cities/guangzhou.html' },
+     '河东区':{value:1,link: './cities/guangzhou.html' },
+     '和平区':{value:1,link: './cities/guangzhou.html' },
+     '滨海新区':{value:1,link: './cities/guangzhou.html' },
+    },
+    '河北':{
+     '石家庄市': {value:1,link: './city/石家庄.html' },
+     '衡水市':{value:1,link: './city/衡水.html' },
+    },
+    '山西':{
+     '晋城市': {value:1,link: './cities/guangzhou.html' },
+    },
+    '内蒙古':{
+     '赤峰市': {value:1,link: './cities/guangzhou.html' },
+    },
+    '山东':{
+     '济南市': {value:1,link: './cities/guangzhou.html' },
+     '青岛市': {value:1,link: './cities/guangzhou.html' },
+     '烟台市': {value:1,link: './cities/guangzhou.html' },
+     '枣庄市': {value:1,link: './cities/guangzhou.html' },
+    },
+    '陕西':{
+     '西安市': {value:1,link: './cities/guangzhou.html' },
+     '渭南市':{value:1,link: './cities/guangzhou.html' },
+    },
+   '河南':{
+     '郑州市': {value:1,link: './cities/guangzhou.html' },
+     '洛阳市':{value:1,link: './cities/guangzhou.html' },
+     '开封市':{value:1,link: './cities/guangzhou.html' },
+     '焦作市':{value:1,link: './cities/guangzhou.html' },
+     '平顶山市':{value:1,link: './cities/guangzhou.html' },
+     '三门峡市':{value:1,link: './cities/guangzhou.html' },
+     '新乡市':{value:1,link: './cities/guangzhou.html' },
+     '许昌市':{value:1,link: './cities/guangzhou.html' },
+     '济源市':{value:1,link: './cities/guangzhou.html' },
+     '南阳市':{value:1,link: './cities/guangzhou.html' },
+    },
+    '甘肃':{
+     '兰州市': {value:1,link: './cities/guangzhou.html' },
+     '嘉峪关市':{value:1,link: './cities/guangzhou.html' },
+     '酒泉市':{value:1,link: './cities/guangzhou.html' },
+    },
+    '四川':{
+     '成都市': {value:1,link: './cities/guangzhou.html' },
+    },
+    '安徽':{
+     '芜湖市': {value:1,link: './cities/guangzhou.html' },
+    },
+    '江苏':{
+     '南京市': {value:1,link: './cities/guangzhou.html' },
+     '苏州市':{value:1,link: './cities/guangzhou.html' },
+    },
+    '上海':{
+     '徐汇区': {value:1,link: './cities/guangzhou.html' },
+     '静安区': {value:1,link: './cities/guangzhou.html' },
+     '浦东新区': {value:1,link: './cities/guangzhou.html' },
+    },
+    '浙江':{
+     '杭州市': {value:1,link: './cities/guangzhou.html' },
+     '绍兴市':{value:1,link: './cities/guangzhou.html' },
+    },
+    '湖北':{
+     '襄阳市': {value:1,link: './cities/guangzhou.html' },
+    },
     };
 
    function buildSeriesData(pName) {

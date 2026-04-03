@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>衡水</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: #111;
+            min-height: 100vh;
+            /* 自定义背景图片区域: 可将下面的url替换为您自己的图片地址 */
+            background-image: url('image/河北/衡水/hengshui.png'), 
+                            radial-gradient(circle at 10% 20%, rgba(235, 245, 255, 0.6) 0%, rgba(210, 225, 245, 0.4) 100%),
+                            repeating-linear-gradient(45deg, rgba(200, 210, 225, 0.15) 0px, rgba(200, 210, 225, 0.15) 2px, transparent 2px, transparent 8px);
+            background-attachment: fixed;
+            position: relative;
+            background-size: 100% 100%
+        }
+        
+        /* 流动光晕动画 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at 40% 50%, rgba(255, 245, 215, 0.25) 0%, rgba(210, 190, 150, 0.08) 80%);
+            animation: softGlow 18s infinite alternate ease-in-out;
+        }
+        
+        @keyframes softGlow {
+            0% {
+                opacity: 0.4;
+                background: radial-gradient(circle at 30% 40%, rgba(255, 240, 200, 0.25) 0%, rgba(200, 180, 140, 0.08) 80%);
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                background: radial-gradient(circle at 70% 60%, rgba(245, 225, 170, 0.3) 0%, rgba(180, 160, 120, 0.1) 90%);
+            }
+            100% {
+                opacity: 0.5;
+                background: radial-gradient(circle at 20% 70%, rgba(255, 235, 190, 0.35) 0%, rgba(210, 190, 150, 0.08) 85%);
+                transform: scale(1.02);
+            }
+        }
+        
+        /* 飘浮粒子层 */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 245, 210, 0.6);
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: floatParticle 12s infinite linear;
+            box-shadow: 0 0 8px rgba(255, 215, 140, 0.4);
+        }
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-20vh) translateX(40px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 朋友圈主容器 */
+        .moments-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: transparent;
+            position: relative;
+            z-index: 10;
+            padding: 12px 0 40px 0;
+        }
+        
+        /* 头部卡片半透毛玻璃 */
+        .moments-header {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            margin: 16px 16px 20px 16px;
+            padding: 20px 16px 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0,0,0,0.02);
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .moments-header:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .moments-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #5a3e2b, #9b6e4c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .moments-header h1:before {
+            content: "📸";
+            font-size: 26px;
+            background: none;
+            color: #b77b46;
+        }
+        .moments-header h1:after {
+            content: "✨";
+            font-size: 26px;
+            background: none;
+            color: #dba258;
+        }
+        .moments-header p {
+            font-size: 13px;
+            color: #6b4c3b;
+            margin-top: 6px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        
+        /* 朋友圈卡片 */
+        .moment-card {
+            background-color: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(0px);
+            margin: 14px 16px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .moment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.98);
+            border-color: rgba(230, 200, 160, 0.4);
+        }
+        
+        .moment-inner {
+            padding: 18px 16px 20px 16px;
+        }
+        
+        /* 用户信息 */
+        .moment-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .avatar-placeholder {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(145deg, #e9d6bc, #dbbc94);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+        .moment-card:hover .avatar-placeholder {
+            transform: scale(1.02);
+        }
+        .profile-info .name {
+            font-weight: 650;
+            font-size: 16px;
+            color: #2d2a24;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .profile-info .time {
+            font-size: 11px;
+            color: #aa9f8c;
+            letter-spacing: 0.2px;
+        }
+        .moment-text {
+            font-size: 15px;
+            line-height: 1.48;
+            color: #1f1c17;
+            margin-bottom: 18px;
+            word-break: break-word;
+        }
+        
+        /* 照片网格 - 支持1~9张自适应 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            background-color: transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .photo-grid.single-photo {
+            display: flex;
+            max-height: 340px;
+        }
+        .photo-grid.single-photo .photo-item {
+            width: 100%;
+            aspect-ratio: auto;
+            max-height: 340px;
+        }
+        .photo-grid.single-photo .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            max-height: 340px;
+            transition: transform 0.3s ease, box-shadow 0.2s;
+        }
+        .photo-grid.two-photos {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .photo-grid.four-photos {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        /* 九宫格默认三列，完美支持 */
+        .photo-item {
+            position: relative;
+            background-color: #f7f2e9;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            border-radius: 14px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease, filter 0.2s;
+            cursor: pointer;
+        }
+        .photo-item img:hover {
+            transform: scale(1.02);
+            filter: brightness(1.02) contrast(1.02);
+        }
+        
+        /* 底部互动栏 */
+        .moment-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 28px;
+            margin-top: 18px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(215, 190, 150, 0.3);
+            color: #8f7a62;
+            font-size: 13px;
+        }
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: default;
+            transition: all 0.2s;
+        }
+        .action-item:hover {
+            color: #cc8b4a;
+            transform: translateY(-1px);
+        }
+        
+        .edit-note {
+            text-align: center;
+            font-size: 13px;
+            background: rgba(245, 240, 230, 0.7);
+            backdrop-filter: blur(8px);
+            width: fit-content;
+            margin: 20px auto 16px;
+            padding: 8px 22px;
+            border-radius: 50px;
+            color: #896e4e;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 245, 220, 0.7);
+        }
+        
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #a28c70;
+            margin-top: 24px;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 1px rgba(255,255,240,0.6);
+        }
+        
+        /* ========= 模态框 (图片放大) 样式 ========= */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .image-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: zoomIn 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.92);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 245, 210, 0.3);
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 44px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            font-family: monospace;
+            line-height: 1;
+        }
+        .close-modal:hover {
+            transform: scale(1.1);
+            background: rgba(0,0,0,0.8);
+        }
+        @media (max-width: 550px) {
+            .close-modal {
+                top: 12px;
+                right: 16px;
+                width: 44px;
+                height: 44px;
+                font-size: 36px;
+            }
+            .modal-content img {
+                border-radius: 16px;
+            }
+            .moment-card {
+                margin: 12px 12px;
+            }
+            .moment-inner {
+                padding: 14px;
+            }
+            .avatar-placeholder {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
+            }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(210, 190, 160, 0.2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(140, 100, 70, 0.4);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 飘浮动效粒子层 -->
+<div class="floating-particles" id="particles-container"></div>
+
+<div class="moments-container">
+    <div class="moments-header">
+        <h1>我的足迹 · 衡水</h1>
+        <p>人生天地间，忽如远行客</p>
+    </div>
+
+    <!-- ======================= -->
+    <!-- 朋友圈卡片组 (每一组.moment-card 即为一个独立朋友圈单元) -->
+    <!-- 每组包含文字 + 图片网格，完全支持任意布局，特别新增九宫格示例 -->
+    <!-- ======================= -->
+   
+
+    <!-- 组4: 六张插画合集 -->
+    <div class="moment-card">
+        <div class="moment-inner">
+            <div class="moment-profile">
+                <div class="avatar-placeholder">👦</div>
+                <div class="profile-info">
+                    <div class="name">衡水市</div>
+                    <div class="time">2026年2月3日 · 衡水市</div>
+                </div>
+            </div>
+            <div class="moment-text">
+                这么久，那么美，周末到河北！
+            </div>
+            <div class="photo-grid">
+                <div class="photo-item"><img src="image/河北/衡水/2026020301/e1cd1eef3b7d26de0b7908be013c3850.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026020301/124a7cfb081bfa122060f542facc57ae.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026020301/15e46fd162398b281d86fa0fada47b04.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026020301/8bedc28e3e1d22360f169e676267cfe0.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026020301/e4da79a586a811805f094d444e5ae0c0.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026020301/274cda6d2534e3352f1f2ee77c664580.jpg"></div>
+            </div>
+            <div class="moment-actions">
+                <div class="action-item"><span>❤️</span><span>205</span></div>
+                <div class="action-item"><span>💬</span><span>34</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="moment-card">
+        <div class="moment-inner">
+            <div class="moment-profile">
+                <div class="avatar-placeholder">👦</div>
+                <div class="profile-info">
+                    <div class="name">衡水湖</div>
+                    <div class="time">2026年3月8日 · 衡水湖</div>
+                </div>
+            </div>
+            <div class="moment-text">
+                小舟从此逝，江海寄余生
+            </div>
+            <div class="photo-grid">
+                <div class="photo-item"><img src="image/河北/衡水/2026030801/3f1b15693fe819fd27a31952c77ae51c.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026030801/919f0bd394cf84c7640facb938a227a3.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026030801/25939c5498dbba20529f65ba8a87860c.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026030801/36363da75939ddc023e6b914790a0721.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026030801/aa36ec5f31e5b6118547b283695f1b90.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026030801/b7e4d35c04d6f29af04bfb10f5505e9b.jpg"></div>
+            </div>
+            <div class="moment-actions">
+                <div class="action-item"><span>❤️</span><span>205</span></div>
+                <div class="action-item"><span>💬</span><span>34</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= 组7: 九宫格完整9张图 (新增) 朋友圈经典九宫格样式 ========= -->
+    <div class="moment-card">
+        <div class="moment-inner">
+            <div class="moment-profile">
+                <div class="avatar-placeholder">👦</div>
+                <div class="profile-info">
+                    <div class="name">宝云寺</div>
+                    <div class="time">2026年3月22日 · 宝云寺</div>
+                </div>
+            </div>
+            <div class="moment-text">
+                没什么可玩的
+            </div>
+            <!-- 九宫格：九个图片自动排列为3x3完美网格 -->
+            <div class="photo-grid">
+                <div class="photo-item"><img src="image/河北/衡水/2026032201/0f0edb2f5d0c238f6e9bdd4f36e4c26b.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026032201/e67d3515fb644fd48bf3a6fde6e00077.jpg"></div>
+                <div class="photo-item"><img src="image/河北/衡水/2026032201/3e0838d6a1e14be0c31c6aaea4e37a7b.jpg"></div>
+            </div>
+            <div class="moment-actions">
+                <div class="action-item"><span>❤️</span><span>356</span></div>
+                <div class="action-item"><span>💬</span><span>48</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="moment-card">
+        <div class="moment-inner">
+            <div class="moment-profile">
+                <div class="avatar-placeholder">👦</div>
+                <div class="profile-info">
+                    <div class="name">中湖福地</div>
+                    <div class="time">2026年4月1日 · 中湖福地</div>
+                </div>
+            </div>
+            <div class="moment-text">
+                在夜晚的乡间等车
+            </div>
+            <!-- 九宫格：九个图片自动排列为3x3完美网格 -->
+            <div class="photo-grid">
+                <div class="photo-item"><img src="image/河北/衡水/2026040101/5dd4033655b223b2fe3052d04f8facaa.jpg"></div>
+            </div>
+            <div class="moment-actions">
+                <div class="action-item"><span>❤️</span><span>356</span></div>
+                <div class="action-item"><span>💬</span><span>48</span></div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <div class="edit-note">
+        ✨ 我们的故事未完待续...... ✨
+    </div>
+    <footer>🍃 Real-Jenny.github.io | 我的足迹 🍃</footer>
+</div>
+
+<!-- ========= 图片放大模态框 HTML ========= -->
+<div id="imageModal" class="image-modal">
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="放大预览">
+    </div>
+    <div class="close-modal" id="closeModalBtn">✕</div>
+</div>
+
+<script>
+    (function() {
+        // 自动为所有 .photo-grid 根据图片数量进行样式优化 (九宫格自动识别)
+        const grids = document.querySelectorAll('.photo-grid');
+        grids.forEach(grid => {
+            const items = grid.querySelectorAll('.photo-item');
+            const count = items.length;
+            if (count === 1) {
+                grid.classList.add('single-photo');
+                grid.style.display = 'flex';
+            } else {
+                grid.classList.remove('single-photo');
+                if (count === 2) {
+                    grid.classList.add('two-photos');
+                    grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                } else if (count === 4) {
+                    grid.classList.add('four-photos');
+                    grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                } else {
+                    // 3,5,6,7,8,9 默认均为3列 (九宫格完美3x3，其他数量也整齐)
+                    grid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                }
+                grid.style.display = 'grid';
+            }
+        });
+        
+        // 生成动态漂浮粒子
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+            const particleCount = 38;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 12 + 3;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 15 + 8 + 's';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.background = `radial-gradient(circle, rgba(255, 225, 170, 0.7), rgba(230, 190, 120, 0.3))`;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+        
+        // ========= 图片点击模态框功能 =========
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementById('closeModalBtn');
+        
+        // 为所有图片添加点击事件 (支持动态添加)
+        function bindImageClick() {
+            const allImages = document.querySelectorAll('.photo-item img');
+            allImages.forEach(img => {
+                img.removeEventListener('click', imageClickHandler);
+                img.addEventListener('click', imageClickHandler);
+            });
+        }
+        
+        function imageClickHandler(e) {
+            e.stopPropagation();
+            const src = this.getAttribute('src');
+            const alt = this.getAttribute('alt') || '朋友圈图片';
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+        closeBtn.addEventListener('click', closeModal);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+        });
+        
+        bindImageClick();
+        
+        // 监听未来可能动态添加的卡片图片
+        const observer = new MutationObserver(function() {
+            bindImageClick();
+        });
+        observer.observe(document.querySelector('.moments-container'), { childList: true, subtree: true });
+        
+        window.addEventListener('resize', () => {
+            const particles = document.querySelectorAll('.particle');
+            if (particles.length < 30) {
+                const container = document.getElementById('particles-container');
+                if (container && container.children.length < 30) createParticles();
+            }
+        });
+    })();
+</script>
+</body>
+</html>
