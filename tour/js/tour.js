@@ -169,7 +169,7 @@ var myChart = echarts.init(document.getElementById('chinaMap'));
     },
    '河南':{
      '郑州市': {value:1,link: './cities/郑州.html' },
-     '洛阳市':{value:1,link: './cities/洛阳 },
+     '洛阳市':{value:1,link: './cities/洛阳.html' },
      '开封市':{value:1,link: './cities/开封.html' },
      '焦作市':{value:1,link: './cities/焦作.html' },
      '平顶山市':{value:1,link: './cities/平顶山.html' },
