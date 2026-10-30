@@ -1,4 +1,4 @@
-var myChart = echarts.init(document.getElementById('chinaMap'));
+   var myChart = echarts.init(document.getElementById('chinaMap'));
    var oBack = document.getElementById("goBack");
 
    var provinces = ['shanghai', 'hebei', 'shanxi', 'neimenggu', 'liaoning', 'jilin', 'heilongjiang', 'jiangsu',
@@ -238,6 +238,40 @@ var myChart = echarts.init(document.getElementById('chinaMap'));
     });
    }
 
+   //  更新统计面板
+   function updateStats(pName, Chinese_) {
+    var visited, unvisited, total;
+    if (pName === "china") {
+     // 全国：统计省级（排除无数据的台湾等按 seriesData 计）
+     total = seriesData.length;
+     visited = seriesData.filter(function(d) { return d.value === 1; }).length;
+     unvisited = total - visited;
+    } else {
+     // 省级：统计该省下所有市/区
+     var map = echarts.getMap(pName);
+     if (!map || !map.geoJson || !map.geoJson.features) {
+      total = 0; visited = 0; unvisited = 0;
+     } else {
+      var cityMeta = cityDataByProvince[Chinese_] || cityDataByProvince[pName] || {};
+      total = map.geoJson.features.length;
+      visited = 0;
+      map.geoJson.features.forEach(function(feature) {
+       var name = (feature.properties && feature.properties.name) || feature.name;
+       var meta = cityMeta[name];
+       if (meta && meta.value === 1) visited++;
+      });
+      unvisited = total - visited;
+     }
+    }
+    var unit = pName === "china" ? "省" : "市/区";
+    var scopeText = pName === "china" ? "全国省级" : (Chinese_ || pName) + " 市/区";
+    document.getElementById('statsPanel').innerHTML =
+     '<div class="stat-title">' + scopeText + ' 统计</div>' +
+     '去过：<span class="stat-visited">' + visited + '</span> 个' + unit + '<br/>' +
+     '未去过：<span class="stat-unvisited">' + unvisited + '</span> 个' + unit + '<br/>' +
+     '总共：' + total + ' 个' + unit;
+   }
+
    oBack.onclick = function() {
     initEcharts("china", "中国");
    };
@@ -335,6 +369,8 @@ var myChart = echarts.init(document.getElementById('chinaMap'));
      }]
     };
     myChart.setOption(option);
+
+    updateStats(pName, Chinese_);
 
     myChart.off("click");
     // 全国时，添加click 进入省级

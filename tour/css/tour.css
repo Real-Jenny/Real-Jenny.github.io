@@ -25,3 +25,26 @@ body {
     display: block;
     transition: all 0.5s;
   }
+
+/*  统计面板样式 */
+#statsPanel {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid #51d2ea;
+  border-radius: 6px;
+  color: #fbfdfe;
+  font-size: 14px;
+  line-height: 1.8;
+  z-index: 999;
+  pointer-events: none;
+}
+
+#statsPanel .stat-title {
+  color: #51d2ea;
+  font-weight: bold;
+}
+#statsPanel .stat-visited { color: #26a69a; }
+#statsPanel .stat-unvisited { color: #6c7a89; }
