@@ -214,7 +214,7 @@ var myChart = echarts.init(document.getElementById('chinaMap'));
      '惠州市': {value:1,link: './cities/惠州.html' },
     },
     '青海':{
-     '格尔木市': {value:1,link: './cities/格尔木.html' },
+     '海西藏族自治州': {value:1,link: './cities/海西藏族自治州.html' },
      '西宁市': {value:1,link: './cities/西宁.html' },
     },
     };
